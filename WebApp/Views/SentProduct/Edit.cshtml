@@ -1,0 +1,41 @@
+﻿@model DAL.SentProduct
+
+@{
+    ViewData["Title"] = "Edycja";
+}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+<h1>Edycja</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Invoice" class="control-label"></label>
+                <input asp-for="Invoice" class="form-control" />
+                <span asp-validation-for="Invoice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Company.Name" class="control-label"></label>
+                <input asp-for="Company.Name" class="form-control ui-autocomplete-input" id="Name" type="text" data-val="true" data-val-required="Uzupełnij to pole" name="Company.Name" autocomplete="off">
+                <span asp-validation-for="Company.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" class="form-control" type="date"/>
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" value="Zapisz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

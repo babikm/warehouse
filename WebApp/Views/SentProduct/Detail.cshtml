@@ -1,0 +1,56 @@
+﻿@model DAL.SentProduct
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<h1>Faktura @Model.Invoice</h1>
+<table id="table" class="table table-hover">
+    <thead class="thead thead-dark">
+        <tr>
+            <th>Typ</th>
+            <th>
+                Nazwa
+            </th>
+            <th>
+                Kod kreskowy
+            </th>
+            <th>
+                Waga
+            </th>
+            <th>
+                Data
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+        @foreach (var item in Model.List)
+        {
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Barcode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Weight)
+                    </td>
+                    <td>
+                        @Html.Raw(item.Date.ToString("dd/MM/yyyy"))
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="/SentProduct/EditProduct/@Model.Id?itemId=@item.Id">Edytuj</a>
+
+                    </td>
+                </tr>
+            </tbody>
+        }
+</table>
+
+
+

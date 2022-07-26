@@ -1,0 +1,58 @@
+﻿@model IEnumerable<DAL.Company>
+
+@{
+    ViewData["Title"] = "Kontrahenci";
+}
+
+<h1>Kontrahenci</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Dodaj</a>
+</p>
+<table class="table">
+    <thead class="thead thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nip)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Locality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Street)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nip)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Locality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                <a class="btn btn-primary" href="/Company/Edit/@item.Id">Edytuj</a>
+                <a class="btn btn-danger" onclick="return confirm('Jesteś pewny?')" href="/Company/Delete/@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

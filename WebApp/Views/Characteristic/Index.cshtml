@@ -1,0 +1,40 @@
+﻿@model IEnumerable<DAL.Characteristic>
+
+@{
+    ViewData["Title"] = "Kategorie";
+}
+
+<h1>Kategorie</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Dodaj</a>
+</p>
+<table class="table">
+    <thead class="thead thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a class="btn btn-primary" href="/Characteristic/Edit/@item.Id">Edytuj</a>
+                <a class="btn btn-danger" onclick="return confirm('Jesteś pewny?')" href="/Characteristic/Delete/@item.Id">Usuń</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

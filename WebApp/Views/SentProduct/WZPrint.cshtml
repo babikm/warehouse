@@ -1,0 +1,168 @@
+﻿@model DAL.SentProduct
+
+
+@{
+    ViewData["Title"] = "Kontrahenci";
+}
+
+<link rel="stylesheet" href="/css/wz.css" />
+
+<body>
+    <input id="btnPrint" class="d-print-none" type="button" value="DRUKUJ WZ" onclick="window.print()" />
+    <div class="invoice-box">
+        <table>
+            <tr>
+                <td style="text-align:right">
+                    Data: @Model.Date.ToString("dd.MM.yyyy")
+                </td>
+            </tr>
+        </table>
+
+        <table cellpadding="0" cellspacing="0">
+
+
+            <tr class="information" style="text-align:center;">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td id="left" style="width:50%;border-bottom: groove;">
+                                <a>Sprzedawca:</a>
+                                <hr style="margin-right:20px; margin-top: 5px" />
+                                <h5><b>PLAST MM Maciej Pękala</b></h5>
+                                Słowackiego 3D<br />
+                                32-650 Kęty <br />
+                                NIP: PL5491521980
+                            </td>
+
+                            <td id="right" style="width:50%; border-bottom:groove; margin-left:5px;">
+                                <a>Odbiorca:</a>
+                                <hr style="margin-left:20px; margin-top: 5px" />
+                                <h5><b>@Model.Company.Name</b></h5>
+                                @Model.Company.Street<br />
+                                @Model.Company.PostCode @Model.Company.Locality<br />
+                                NIP: @Model.Company.Nip
+                            </td>
+                        </tr>
+                    </table>
+                    <h3 style="font-weight:bold;">WZ @Model.WZ/@Model.Date.Month/@Model.Date.Year</h3>
+                </td>
+            </tr>
+
+            <tr class="heading">
+                <td>
+                    Nazwa
+                </td>
+
+                <td>
+                    Waga
+                </td>
+            </tr>
+            @foreach (var item in ViewData["grouped"] as IEnumerable<ProductViewModel>)
+            {
+                <tr class="item">
+
+
+                    <td>
+                        @item.Type Regranulat @item.Name
+                    </td>
+                    <td>
+                        @item.Weight kg
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+        <br />
+
+        Numer rejestracyjny: @Model.LicensePate<br />
+        <table>
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td style="width:40%; padding-right:50px">
+
+
+                                <table style="text-align:center; border: 1px solid">
+                                    <tr class="heading">
+                                        <td style="padding:5px">Wystawił(a):</td>
+                                    </tr>
+                                    <tr class="item-nobottom" style="height: 110px;">
+                                        <td> </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+
+                            <td style="width:40%; padding-left:50px">
+                                <table style="text-align:center; border: 1px solid">
+                                    <tr class="heading">
+                                        <td style="padding:5px">Odebrał(a):</td>
+                                    </tr>
+                                    <tr class="item-nobottom" style="height: 110px;">
+                                        <td> </td>
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr class="heading">
+                <td>
+                    Lp.
+                </td>
+                <td style="text-align:left">
+                    Kod kreskowy
+                </td>
+                <td>
+                    Typ
+                </td>
+                <td>
+                    Nazwa
+                </td>
+                <td>
+                    Waga
+                </td>
+            </tr>
+                @{ int i = 0;
+                }
+                @foreach (var item in Model.List)
+                {
+            <tr class="item" style="font-size:12px;">
+                    <td style="width:60px">
+                        @{ i++;}
+                        @i
+                    </td>
+                    <td style="text-align:left">
+                        @item.Barcode
+                    </td>
+                    <td>
+                        @item.Type
+                    </td>
+                    <td>
+                        Regranulat @item.Name
+                    </td>
+                    <td>
+                        @item.Weight kg
+                    </td>
+
+            </tr>
+                }
+        </table>
+    </div>
+
+
+</body>
+<script>
+    var right = document.getElementById('right').style.height;
+    var left = document.getElementById('left').style.height;
+    if (right > left) {
+        document.getElementById('left').style.height = right;
+    }
+</script>

@@ -1,0 +1,77 @@
+﻿@model MultipleViewModel
+@{
+    ViewData["Title"] = "Lista produktów";
+}
+
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/dataTables.bootstrap4.min.css">
+    <script type="text/javascript" src="~/js/scripts.js"></script>
+</head>
+
+
+<h1>Materiał</h1>
+
+
+<p>
+    <a class="btn btn-success" asp-action="Create">Nowy produkt</a>
+</p>
+
+@foreach (var item in Model.Characteristics)
+{
+
+    <a class="btn btn-info" asp-action="Create" asp-route-type="@item.Type" asp-route-name="@item.Name">@item.Type @item.Name </a>
+
+}
+<hr />
+
+
+<table id="table" class="table table-hover">
+    <thead class="thead thead-dark">
+        <tr>
+            <th>Lp.</th>
+            <th>
+                Kod kreskowy
+            </th>
+            <th>
+                Typ
+            </th>
+            <th>
+                Nazwa
+            </th>
+            <th>
+                Weight
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var products in Model.Products)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => products.Barcode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => products.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => products.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => products.Weight)
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/Product/Edit/@products.Id">Edytuj</a>
+                    <a class="btn btn-danger" onclick="return confirm('Jesteś pewny?')" href="/Product/Delete/@products.Id">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

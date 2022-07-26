@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\Michał\source\repos\PlastMM\WebApp\bin\Debug\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2022-06-28T19:59:15.1148921Z;True|2022-06-27T23:16:49.6049316+02:00;True|2022-04-11T22:35:58.3176488+02:00;True|2022-04-09T16:38:53.1122369+02:00;True|2022-04-09T16:36:58.1764099+02:00;True|2022-03-22T18:19:04.4722219+01:00;True|2022-03-21T06:28:07.3722033+01:00;True|2022-03-17T18:26:41.7453676+01:00;True|2022-03-17T18:23:26.8895514+01:00;</History>
+  </PropertyGroup>
+</Project>

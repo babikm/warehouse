@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DAL.Product>
+
+@{
+    ViewData["Title"] = "Kolejka";
+}
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    </head>
+
+    <body>
+
+        <h1>Kolejka</h1>
+        <hr />
+        <form action="/Product/AddQueueMore" method="post">
+            <textarea name="search" autofocus="" required=""></textarea>
+            <input type="submit" value="Dodaj do kolejki (wiele)" class="btn btn-warning">
+        </form>
+        <br />
+        <form action="/product/AddSent" method="post">
+            <input name="Date" type="date" required="">
+            <input name="licensePlate" id="licensePlate" placeholder="Podaj rejestrację" required="">
+            <input name="Company" id="Name" placeholder="Podaj firmę" required class="ui-autocomplete-input" autocomplete="off">
+            <input class="btn btn-primary" type="submit" formaction="/Product/AddSent">
+        </form>
+        @foreach (var item in ViewData["grouped"] as IEnumerable<ProductViewModel>)
+        {
+            <h2>@item.Name @item.Weight</h2>
+        }
+        <br />
+        <table id="table" class="table">
+            <thead class="thead thead-dark">
+                <tr>
+                    <th>
+                        Lp.
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Barcode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Weight)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @{ i++;}
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Barcode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Weight)
+                        </td>
+
+                        <td>
+                            <a class="btn btn-danger" onclick="return confirm('Jesteś pewny?')" href="/Product/DeleteFromQueue/@item.Id">Usuń</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DAL.SentProduct>
+
+@{
+    ViewData["Title"] = "Wydane";
+}
+
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css">
+    <script type="text/javascript" src="~/js/scripts.js"></script> 
+</head>
+
+<h1>Wydane</h1>
+
+<table id="table" class="table table-hover dataTable no-footer">
+    <thead class="thead thead-dark">
+        <tr>
+            <th>
+                Lp.
+            </th>
+            <th hidden>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Invoice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ int i = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @{ i++;}
+                    @i
+                </td>
+                <td hidden>
+                    @foreach (var it in item.List)
+                    {
+                        @it.Barcode
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Invoice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company.Name)
+                </td>
+                <td>
+                    <span hidden>@item.Date.ToString("yyyyMMdd")</span>
+                    @Html.DisplayFor(modelItem => item.Date)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sum)
+                </td>
+                <td>
+                    <a class="btn btn-primary" href="/SentProduct/Edit/@item.Id">Edytuj</a>
+                    <a class="btn btn-secondary" href="/SentProduct/Detail/@item.Id">Szczegóły</a>
+                    <a class="btn btn-info" href="/SentProduct/Back/@item.Id">Cofnij MG</a>
+                    <a class="btn btn-warning" onclick="return confirm('Sprawdź czy kolejka jest pusta!')" href="/SentProduct/BackToQueue/@item.Id">Cofnij KOL</a>
+                    <a class="btn btn-light" href="/SentProduct/WZPrint/@item.Id">WZ</a>
+                    <a class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz to usunąć?')" href="/SentProduct/Delete/@item.Id">USUŃ</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
